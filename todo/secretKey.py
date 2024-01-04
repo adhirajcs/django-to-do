@@ -1,1 +1,0 @@
-key = "django-insecure-p*ktf-$u-fzbyygb5m6o@f5b8j8&4x&3e%+_umxo_b&&g4n+^p"
