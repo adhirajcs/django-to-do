@@ -5,9 +5,17 @@
 <ul>
     {% for todo in todos %}
     <li>
-        {{ todo.title}}: {% if todo.completed %}Completed{% else %}Not Comepleted{% endif %}
+        {% if todo.completed %}<strike>{{ todo.title}}</strike>{% else %}{{ todo.title}}{% endif %}
+        
     </li>
     {% endfor %}
 </ul>
+
+<form method="post" action="{% url 'addTodos' %}">
+    {% csrf_token %}
+    <label for="newTodo">Add Todo:</label>
+    <input type="text" id="newTodo" name="newTodo" required>
+    <button type="submit">Add Todo</button>
+</form>
 
 {% endblock %}
