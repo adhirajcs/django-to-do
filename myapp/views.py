@@ -7,6 +7,9 @@ from .forms import *
 # def home(request):
 #     return render(request, "home.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def todos(request):
     items = TodoItem.objects.all()
     form = TodoForm()
