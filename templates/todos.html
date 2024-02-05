@@ -13,6 +13,9 @@
         <form method="post" action="/">
             {% csrf_token %}
             <input type="hidden" name="todo_id" value="{{ todo.id }}">
+            
+            <a href="{% url 'edit' todo.id %}" class="btn btn-sm">🖊️</a>
+            
             {% if not todo.completed %}
             <button type="submit" class="btn btn-sm" name="complete">✔️</button>
             {% elif todo.completed %}
