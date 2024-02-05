@@ -6,4 +6,5 @@ urlpatterns = [
     # path("", views.todos, name="home"),
     path("", views.todos, name="Todos"),
     path("about", views.about, name="About"),
+    path("edit/<int:todo_id>", views.edit, name="edit"),
 ]

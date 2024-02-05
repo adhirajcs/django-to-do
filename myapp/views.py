@@ -10,19 +10,6 @@ from .forms import *
 def about(request):
     return render(request, "about.html")
 
-# def todos(request):
-#     items = TodoItem.objects.all()
-#     form = TodoForm()
-
-#     if request.method == 'POST':
-#         form = TodoForm(request.POST)        
-#         if form.is_valid():
-#             form.save()
-#         return redirect("/")
-
-#     return render(request, "todos.html", {"todos": items ,'form':form})
-
-
 def todos(request):
     items = TodoItem.objects.all()
     form = TodoForm()
@@ -40,7 +27,7 @@ def todos(request):
                 todo.completed = False
             elif 'delete' in request.POST:
                 todo.delete()
-                return redirect('/')
+                return redirect("/")
             
             todo.save()
             return redirect('/')
@@ -50,6 +37,18 @@ def todos(request):
         if form.is_valid():
             form.save()
         return redirect("/")
-
     
     return render(request, "todos.html", {"todos": items, 'form': form})
+
+
+def edit(request, todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    form = TodoForm(instance=todo)
+
+    if request.method == 'POST':
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    return render(request, "edit.html", {"todo": todo, 'form': form})
