@@ -1,15 +1,22 @@
-from django.shortcuts import redirect, render, HttpResponse
+from django.shortcuts import redirect, render
 from .models import TodoItem
 from .forms import *
 
-# Create your views here.
+from .forms import CreateUserForm, LoginForm
+from django.contrib.auth.decorators import login_required
+
+# Authentication Models and methods
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login, logout
 
 # def home(request):
 #     return render(request, "home.html")
 
+
 def about(request):
     return render(request, "about.html")
 
+@login_required(login_url="login")
 def todos(request):
     items = TodoItem.objects.all()
     form = TodoForm()
@@ -40,7 +47,7 @@ def todos(request):
     
     return render(request, "todos.html", {"todos": items, 'form': form})
 
-
+@login_required(login_url="login")
 def edit(request, todo_id):
     todo = TodoItem.objects.get(id=todo_id)
     form = TodoForm(instance=todo)
@@ -52,3 +59,48 @@ def edit(request, todo_id):
             return redirect('/')
 
     return render(request, "edit.html", {"todo": todo, 'form': form})
+
+
+def register(request):
+
+	form = CreateUserForm()
+
+	if request.method == "POST":
+		form = CreateUserForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+
+			return redirect("login")
+		
+	context = {'registerform': form}
+
+	return render(request, 'register.html', context=context)
+
+
+def login(request):
+
+	form = LoginForm()
+
+	if request.method == "POST":
+
+		form = LoginForm(request, data=request.POST)
+
+		if form.is_valid():
+			username =  request.POST.get('username')
+			password =  request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)
+			if user is not None:
+				auth.login(request, user)
+				return redirect("Todos")
+	
+	context = {'loginform': form}
+
+	return render(request, 'login.html', context=context)
+
+
+def logout(request):
+	auth.logout(request)
+
+	return redirect("/")
