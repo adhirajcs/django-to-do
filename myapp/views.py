@@ -18,7 +18,7 @@ def about(request):
 
 @login_required(login_url="login")
 def todos(request):
-    items = TodoItem.objects.all()
+    items = TodoItem.objects.filter(user=request.user)          # Filtering by user whose is logged in
     form = TodoForm()
 
     if request.method == 'POST':      
@@ -26,7 +26,7 @@ def todos(request):
         # for updation and deletion
         todo_id = request.POST.get('todo_id')
         if todo_id:
-            todo = TodoItem.objects.get(id=todo_id)
+            todo = TodoItem.objects.get(id=todo_id, user=request.user)      # Ensuring only the user owns the todo
 
             if 'complete' in request.POST:
                 todo.completed = True
@@ -42,6 +42,8 @@ def todos(request):
         # for insertion
         form = TodoForm(request.POST)  
         if form.is_valid():
+            todo = form.save(commit=False)          # Form has been saved but not in the database so that I can add the user with the todo
+            todo.user = request.user                # Associating the todo with the user
             form.save()
         return redirect("/")
     
@@ -49,7 +51,7 @@ def todos(request):
 
 @login_required(login_url="login")
 def edit(request, todo_id):
-    todo = TodoItem.objects.get(id=todo_id)
+    todo = TodoItem.objects.get(id=todo_id, user=request.user)      # Again ensuring only the user owns the todo
     form = TodoForm(instance=todo)
 
     if request.method == 'POST':

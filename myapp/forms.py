@@ -14,7 +14,7 @@ class TodoForm(forms.ModelForm):
 
 	class Meta:
 		model = TodoItem
-		fields = '__all__'
+		fields = ['title', 'completed']  # Excluded the user as it will be auto generated
 
 # Form to register an user
 class CreateUserForm(UserCreationForm):
