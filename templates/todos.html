@@ -7,33 +7,49 @@
 
 
 {% block content %}
-<h1>Todo List</h1>
-<ul>
-    {% for todo in todos %}
-    <li>
-        {% if todo.completed %} <strike> {{todo.title}} </strike> {% else %} {{todo.title}} {% endif %}
-        <form method="post" action="/">
-            {% csrf_token %}
-            <input type="hidden" name="todo_id" value="{{ todo.id }}">
-            
-            <a href="{% url 'edit' todo.id %}" class="btn btn-sm">🖊️</a>
-            
-            {% if not todo.completed %}
-            <button type="submit" class="btn btn-sm" name="complete">✔️</button>
-            {% elif todo.completed %}
-            <button type="submit" class="btn btn-sm btn-info" name="uncomplete">Undo ✔️</button>
-            {% endif %}
-            <button type="submit" class="btn btn-sm" name="delete">❌</button>
-        </form>
-    </li>
-    {% endfor %}
-</ul>
+<div class="container mt-5">
+    <h1>Todo List</h1>
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for todo in todos %}
+            <li class="list-group-item {% if todo.completed %}list-group-item-secondary{% endif %}">
+                {% if todo.completed %}
+                <del>◉ {{ todo.title }}</del>
+                {% else %}
+                ◉ {{ todo.title }}
+                {% endif %}
+                <form method="post" action="/">
+                    {% csrf_token %}
+                    <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <a href="{% url 'edit' todo.id %}" class="btn btn-primary btn-sm">✏️</a>
+                            {% if not todo.completed %}
+                            <button type="submit" class="btn btn-success btn-sm" name="complete">✔️</button>
+                            {% else %}
+                            <button type="submit" class="btn btn-info btn-sm" name="uncomplete">↩️</button>
+                            {% endif %}
+                            <button type="submit" class="btn btn-danger btn-sm" name="delete">❌</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-<form method="POST" action="/">
-    {% csrf_token %}
-    <label for="newTodo">New Todo:</label>
-    {{form.title}}
-    <button class="btn btn-success" type="submit">Add Todo</button>
-</form>
+    <form method="POST" action="/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="newTodo" class="form-label">New Todo:</label>
+            <div class="col-md-6">
+                {{ form.title }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-success" type="submit">➕ Add Todo</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

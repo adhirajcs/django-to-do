@@ -10,8 +10,12 @@ from .models import *
 
 # Form for the todos
 class TodoForm(forms.ModelForm):
-	title= forms.CharField(widget= forms.TextInput(attrs={'placeholder':'Add new to-do...'}))
-
+	title = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Add new to-do...'
+        })
+    )
 	class Meta:
 		model = TodoItem
 		fields = ['title', 'completed']  # Excluded the user as it will be auto generated
@@ -23,9 +27,34 @@ class CreateUserForm(UserCreationForm):
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
 
+	def __init__(self, *args, **kwargs):
+		super(CreateUserForm, self).__init__(*args, **kwargs)
+		self.fields['username'].widget.attrs.update({
+            'class': 'form-control', 
+            'placeholder': 'Enter username'
+        })
+		self.fields['email'].widget.attrs.update({
+            'class': 'form-control', 
+            'placeholder': 'Enter email'
+        })
+		self.fields['password1'].widget.attrs.update({
+            'class': 'form-control', 
+            'placeholder': 'Enter password'
+        })
+		self.fields['password2'].widget.attrs.update({
+            'class': 'form-control', 
+            'placeholder': 'Confirm password'
+        })
+
 
 # Form to Login as user
 class LoginForm(AuthenticationForm):
 	
-	username = forms.CharField(widget=TextInput())
-	password = forms.CharField(widget=PasswordInput())
+	username = forms.CharField(widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter username'
+    }))
+	password = forms.CharField(widget=PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter password'
+    }))

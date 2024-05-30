@@ -16,6 +16,7 @@ from django.contrib.auth import authenticate, login, logout
 def about(request):
     return render(request, "about.html")
 
+
 @login_required(login_url="login")
 def todos(request):
     items = TodoItem.objects.filter(user=request.user)          # Filtering by user whose is logged in
@@ -48,6 +49,7 @@ def todos(request):
         return redirect("/")
     
     return render(request, "todos.html", {"todos": items, 'form': form})
+
 
 @login_required(login_url="login")
 def edit(request, todo_id):
