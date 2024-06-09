@@ -11,7 +11,7 @@
                 {{ form.title }}
             </div>
             <div class="col-md-6">
-                <button class="btn btn-light" type="submit">Update 🔄</button>
+                <button class="btn btn-light" type="submit" id="updateTodoButton" onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Updating...';">Update 🔄</button>
                 <a href="{% url 'Todos' %}" class="btn btn-light">Cancel ❌</a>
             </div>
         </form>

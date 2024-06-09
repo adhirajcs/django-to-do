@@ -34,6 +34,7 @@
         </ul>
     </div>
     <br>
+
     <form method="POST" action="/">
         {% csrf_token %}
         <div class="mb-3">
@@ -43,9 +44,11 @@
             </div>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-light" type="submit">Add Todo ✅</button>
+            <button class="btn btn-light" type="submit" id="addTodoButton" onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Adding...';">Add Todo ✅</button>
         </div>
     </form>
+    <br>
+    <br>
 </div>
 
 {% endblock %}
