@@ -11,15 +11,15 @@
 
     {% csrf_token %}
 
-    {% if form.non_field_errors %}
-    <div class="alert alert-danger">
-        <ul>
-            {% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+    {% if loginform.non_field_errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for error in loginform.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
     <div class="mb-3">
         <label for="{{ loginform.username.id_for_label }}" class="form-label">Username:</label>
