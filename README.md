@@ -68,6 +68,7 @@ The application is hosted on PythonAnywhere. You can access it [here](https://ad
 
 The project directory structure is as follows:
 
+```
 django-to-do/
 │
 ├── myapp/
@@ -106,7 +107,7 @@ django-to-do/
 ├── manage.py
 ├── README.md
 └── requirements.txt
-
+```
 
 ## Features
 
