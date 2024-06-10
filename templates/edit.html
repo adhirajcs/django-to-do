@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-8">
     <h1>Update Todo</h1>
-    <div class="col-md-6">
-        <form method="POST" action="{% url 'edit' todo.id %}">
+    <div class="col-md-12 mx-auto">
+        <form method="POST" action="{% url 'edit' todo.id %}" class="col-md-8 mx-auto">
             {% csrf_token %}
-            <div class="mb-3">
+
+            <div class="mb-3 row">
                 <label for="newTodo" class="form-label">Modified Todo will be:</label>
-                {{ form.title }}
+                <div class="col-sm-12">
+                    {{ form.title }}
+                </div>
             </div>
-            <div class="col-md-6">
-                <button class="btn btn-light" type="submit" id="updateTodoButton" onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Updating...';">Update 🔄</button>
+            <div class="btn-group" role="group">
+                <button class="btn btn-light" type="submit" id="updateTodoButton"
+                    onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Updating...';">Update
+                    🔄</button>
                 <a href="{% url 'Todos' %}" class="btn btn-light">Cancel ❌</a>
             </div>
         </form>

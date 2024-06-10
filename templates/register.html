@@ -5,8 +5,7 @@
 {% block content %}
 
 
-<br>
-
+<div>
 <form method="POST">
 
     {% csrf_token %}
@@ -24,7 +23,7 @@
     {% comment %} Username {% endcomment %}
     <div class="mb-3">
         <label for="{{ registerform.username.id_for_label }}" class="form-label">Username:</label>
-        <div class="col-md-6">
+        <div>
             {{ registerform.username }}
         </div>
     </div>
@@ -32,7 +31,7 @@
     {% comment %} Email Id {% endcomment %}
     <div class="mb-3 mt-3">
         <label for="{{ registerform.email.id_for_label }}" class="form-label">Email:</label>
-        <div class="col-md-6">
+        <div>
             {{ registerform.email }}
         </div>
     </div>
@@ -40,7 +39,7 @@
     {% comment %} Password {% endcomment %}
     <div class="mb-3">
         <label for="{{ registerform.password1.id_for_label }}" class="form-label">Password:</label>
-        <div class="col-md-6">
+        <div>
             {{ registerform.password1 }}
             {% if registerform.password1.errors %}
             <div class="text-danger">
@@ -51,15 +50,18 @@
             {% endif %}
         </div>
         <small class="form-text text-muted">
-            Your password must contain at least 8 characters, can't be entirely numeric, can't be too similar to your
-            other personal information, and can't be a commonly used password.
+            Your password must contain<br>
+            -> at least 8 characters<br>
+            -> can't be entirely numeric<br>
+            -> can't be too similar to your other personal information<br>
+            -> can't be a commonly used password
         </small>
     </div>
 
     {% comment %} Confirm Password {% endcomment %}
     <div class="mb-3">
         <label for="{{ registerform.password2.id_for_label }}" class="form-label">Confirm Password:</label>
-        <div class="col-md-6">
+        <div>
             {{ registerform.password2 }}
             {% if registerform.password2.errors %}
             <div class="text-danger">
@@ -76,6 +78,8 @@
 
 <div class="mt-3">
     <p>Already have an account? <a href="{% url 'login' %}">Log in here</a></p>
+</div>
+
 </div>
 
 {% endblock %}

@@ -5,20 +5,23 @@
 {% block content %}
 <div class="container mt-5">
     <h1>Todo List</h1>
-    <div class="col-md-6">
+    <div class="col-md-12 mx-auto">
         <ul class="list-group">
             {% for todo in todos %}
             <li class="list-group-item {% if todo.completed %}list-group-item-secondary{% endif %}">
-                {% if todo.completed %}
-                <del>◉ {{ todo.title }}</del>
-                {% else %}
-                ◉ {{ todo.title }}
-                {% endif %}
-                <form method="post" action="/">
-                    {% csrf_token %}
-                    <input type="hidden" name="todo_id" value="{{ todo.id }}">
-                    <div class="row g-3">
-                        <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="todo-title">
+                        {% if todo.completed %}
+                        <del>◉ {{ todo.title }}</del>
+                        {% else %}
+                        ◉ {{ todo.title }}
+                        {% endif %}
+                    </span>
+                    <form method="post" action="/" class="d-inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                        <div class="btn-group" role="group">
+
                             <a href="{% url 'edit' todo.id %}" class="btn btn-light btn-sm">✏️</a>
                             {% if not todo.completed %}
                             <button type="submit" class="btn btn-light btn-sm" name="complete">✔️</button>
@@ -26,25 +29,27 @@
                             <button type="submit" class="btn btn-light btn-sm" name="uncomplete">↩️</button>
                             {% endif %}
                             <button type="submit" class="btn btn-light btn-sm" name="delete">❌</button>
+
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </li>
             {% endfor %}
         </ul>
     </div>
     <br>
 
-    <form method="POST" action="/">
+    <form method="POST" action="/" class="col-md-8 mx-auto">
         {% csrf_token %}
         <div class="mb-3">
             <label for="newTodo" class="form-label">New Todo:</label>
-            <div class="col-md-6">
+            <div>
                 {{ form.title }}
             </div>
         </div>
-        <div class="col-md-6">
-            <button class="btn btn-light" type="submit" id="addTodoButton" onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Adding...';">Add Todo ✅</button>
+        <div>
+            <button class="btn btn-light" type="submit" id="addTodoButton"
+                onclick="this.innerHTML = '<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> Adding...';">Add Todo ✅</button>
         </div>
     </form>
     <br>
