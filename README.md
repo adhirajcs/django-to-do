@@ -4,7 +4,7 @@ django-to-do is a simple web application created using Django. It served me as a
 
 ## Cloud Hosting
 
-The application is hosted on PythonAnywhere. You can access it [here](https://adhiraj.pythonanywhere.com/).
+The application is hosted on PythonAnywhere. You can access it here: [adhiraj.pythonanywhere.com](https://adhiraj.pythonanywhere.com/).
 
 ## Table of Contents
 
