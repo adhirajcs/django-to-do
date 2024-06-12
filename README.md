@@ -14,7 +14,7 @@ The application is hosted on PythonAnywhere. You can access it here: [adhiraj.py
 - [Features](#features)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
-- [About](#about)
+- [License](#license)
 
 ## Installation
 
@@ -118,4 +118,4 @@ django-to-do/
 
 ## License
 
-It is not under any license and is purely for educational purposes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
