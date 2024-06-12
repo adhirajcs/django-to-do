@@ -12,8 +12,6 @@ The application is hosted on PythonAnywhere. You can access it here: [adhiraj.py
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
 - [Features](#features)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
 - [License](#license)
 
 ## Installation
